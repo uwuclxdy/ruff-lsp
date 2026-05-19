@@ -1,0 +1,11 @@
+{
+  "$schema": "https://charm.land/crush.json",
+  "lsp": {
+    "ruff": {
+      "command": "ruff",
+      "args": ["server"],
+      "filetypes": ["py", "pyi"],
+      "root_markers": ["pyproject.toml", "ruff.toml", ".ruff.toml", ".git"]
+    }
+  }
+}
