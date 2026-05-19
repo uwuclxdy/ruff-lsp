@@ -41,5 +41,6 @@ ruff-lsp-everywhere/
 │       └── plugin.json
 ├── codex-cli/ ...                    # one dir per tool
 └── scripts/
-    └── install-all.sh                # detect installed tools, configure each (TODO)
+    ├── install-all.sh                # detect installed tools, print merge instructions
+    └── uninstall.sh                  # detect existing integrations, delete drop-ins, list manual cleanup
 ```
