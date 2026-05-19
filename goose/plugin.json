@@ -1,0 +1,6 @@
+{
+  "name": "ruff-lint",
+  "version": "0.1.0",
+  "description": "Run ruff check --fix after goose edits Python files.",
+  "author": { "name": "ruff-lsp-everywhere" }
+}
