@@ -1,0 +1,26 @@
+{
+  "lsp": {
+    "ruff": {
+      "initialization_options": {
+        "settings": {
+          "lint": { "enable": true },
+          "format": { "preview": false }
+        }
+      }
+    }
+  },
+  "languages": {
+    "Python": {
+      "language_servers": ["ruff", "basedpyright", "..."],
+      "formatter": {
+        "language_server": {
+          "name": "ruff"
+        }
+      },
+      "code_actions_on_format": {
+        "source.organizeImports.ruff": true
+      },
+      "format_on_save": "on"
+    }
+  }
+}
