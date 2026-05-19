@@ -1,0 +1,8 @@
+# .aider.conf.yml — ruff integration
+# Place in your home directory (~/.aider.conf.yml) for user-global config,
+# or in the git repo root for project-scoped config (safe to commit).
+
+# Lint Python files with ruff after every edit aider makes.
+auto-lint: true
+lint-cmd:
+  - "python: ruff check --fix"
