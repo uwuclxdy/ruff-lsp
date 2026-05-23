@@ -52,7 +52,7 @@ For VS Code Insiders, replace `Code` with `Code - Insiders`.
 
 ## Caveats
 
-- **Product status (2026).** Cody v1.153.0 was released 2026-05-18 — the product is actively maintained. Sourcegraph went through significant layoffs in 2024 and pivoted toward enterprise, but Cody continues shipping. The public GitHub repo (`sourcegraph/cody`) appears to have been made private; use the VS Code Marketplace for the extension.
+- **Product status.** Cody is actively maintained and published on the VS Code Marketplace. Sourcegraph migrated the `sourcegraph/cody` GitHub repo to a private codebase; a frozen pre-migration snapshot is preserved at [`sourcegraph/cody-public-snapshot`](https://github.com/sourcegraph/cody-public-snapshot). Install the extension via the Marketplace — the snapshot repo is reference-only and not the upstream source.
 - **Cody is not a linter.** Cody provides chat, completions, and code edits. It surfaces the same diagnostic squiggles that VS Code already shows from language server extensions — it does not add its own lint pass.
 - **JetBrains.** The JetBrains Cody plugin uses IntelliJ's built-in inspection and any installed Python plugins (e.g., the Ruff plugin from the JetBrains Marketplace) for diagnostics. Ruff LSP configuration for IntelliJ is separate from the VS Code snippet above.
 - **Type checking.** Ruff does not type-check. Pair with `ms-pyright.pyright` or `detachhead.basedpyright` for type diagnostics alongside Ruff lint/format.
