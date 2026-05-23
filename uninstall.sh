@@ -113,7 +113,7 @@ if exists "$HOME/.config/opencode/opencode.json"; then
 fi
 
 if exists "$HOME/.config/crush/crush.json" || exists "$PWD/.crush.json" || exists "$PWD/crush.json"; then
-  note_manual 'Crush' '~/.config/crush/crush.json or <repo>/.crush.json' 'lsp.ruff'
+  note_manual 'Crush' "$HOME/.config/crush/crush.json or <repo>/.crush.json" 'lsp.ruff'
 fi
 
 if exists "$HOME/.config/zed/settings.json"; then
@@ -143,16 +143,10 @@ fi
 
 printf '\n%sCompanion files%s\n' "$c_yellow" "$c_reset"
 companion_found=0
-# Continue rule files live per-project; only the global one (rare) lives here:
-for p in \
-  "$HOME/.continue/rules/ruff.md"
-do
+# Continue rule files: global (rare) and project-scoped.
+for p in "$HOME/.continue/rules/ruff.md" "$PWD/.continue/rules/ruff.md"; do
   if maybe_rm "$p"; then companion_found=1; fi
 done
-# Also flag potential project-scoped continue rules
-if [[ -f "$PWD/.continue/rules/ruff.md" ]]; then
-  if maybe_rm "$PWD/.continue/rules/ruff.md"; then companion_found=1; fi
-fi
 [[ $companion_found -eq 0 ]] && printf '  %snone found%s\n' "$c_dim" "$c_reset"
 
 # --- Extension uninstall (suggestion only — never auto-run) -----------------
