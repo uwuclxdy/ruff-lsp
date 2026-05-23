@@ -37,40 +37,6 @@ note_manual() {
   printf '  %smanual%s      %s — delete keys [%s] from %s\n' "$c_dim" "$c_reset" "$tool" "$keys" "$path"
 }
 
-vscode_has_ext() {
-  local ext="$1" cli
-  for cli in code cursor windsurf code-insiders codium; do
-    if have "$cli" && "$cli" --list-extensions 2>/dev/null | grep -qix "$ext"; then
-      return 0
-    fi
-  done
-  return 1
-}
-
-vscode_settings_path() {
-  case "$(uname -s)" in
-    Darwin) echo "$HOME/Library/Application Support/Code/User/settings.json" ;;
-    Linux)  echo "$HOME/.config/Code/User/settings.json" ;;
-    *)      echo "${APPDATA:-}/Code/User/settings.json" ;;
-  esac
-}
-
-cursor_settings_path() {
-  case "$(uname -s)" in
-    Darwin) echo "$HOME/Library/Application Support/Cursor/User/settings.json" ;;
-    Linux)  echo "$HOME/.config/Cursor/User/settings.json" ;;
-    *)      echo "${APPDATA:-}/Cursor/User/settings.json" ;;
-  esac
-}
-
-windsurf_settings_path() {
-  case "$(uname -s)" in
-    Darwin) echo "$HOME/Library/Application Support/Windsurf/User/settings.json" ;;
-    Linux)  echo "$HOME/.config/Windsurf/User/settings.json" ;;
-    *)      echo "${APPDATA:-}/Windsurf/User/settings.json" ;;
-  esac
-}
-
 if [[ $REMOVE -eq 1 ]]; then
   printf '\n%sUninstall mode: --remove. Drop-in plugin dirs will be deleted.%s\n' "$c_red" "$c_reset"
 else
@@ -115,51 +81,6 @@ fi
 if exists "$HOME/.config/crush/crush.json" || exists "$PWD/.crush.json" || exists "$PWD/crush.json"; then
   note_manual 'Crush' "$HOME/.config/crush/crush.json or <repo>/.crush.json" 'lsp.ruff'
 fi
-
-if exists "$HOME/.config/zed/settings.json"; then
-  note_manual 'Zed' "$HOME/.config/zed/settings.json" 'lsp.ruff, languages.Python.language_servers, formatter, format_on_save'
-fi
-
-cs="$(cursor_settings_path)"
-if exists "$cs"; then
-  note_manual 'Cursor' "$cs" 'ruff.*, "[python]" formatter overrides, editor.codeActionsOnSave ruff entries'
-fi
-
-ws="$(windsurf_settings_path)"
-if exists "$ws"; then
-  note_manual 'Windsurf' "$ws" 'ruff.*, "[python]" formatter overrides, editor.codeActionsOnSave ruff entries'
-fi
-
-vs="$(vscode_settings_path)"
-if exists "$vs"; then
-  if vscode_has_ext github.copilot || vscode_has_ext saoudrizwan.claude-dev \
-     || vscode_has_ext continue.continue || vscode_has_ext sourcegraph.cody-ai \
-     || vscode_has_ext rooveterinaryinc.roo-cline || vscode_has_ext rooveterinaryinc.roo-code; then
-    note_manual 'VS Code (Copilot/Cline/Roo/Continue/Cody)' "$vs" 'ruff.*, "[python]" formatter, editor.codeActionsOnSave ruff entries'
-  fi
-fi
-
-# --- Companion files --------------------------------------------------------
-
-printf '\n%sCompanion files%s\n' "$c_yellow" "$c_reset"
-companion_found=0
-# Continue rule files: global (rare) and project-scoped.
-for p in "$HOME/.continue/rules/ruff.md" "$PWD/.continue/rules/ruff.md"; do
-  if maybe_rm "$p"; then companion_found=1; fi
-done
-[[ $companion_found -eq 0 ]] && printf '  %snone found%s\n' "$c_dim" "$c_reset"
-
-# --- Extension uninstall (suggestion only — never auto-run) -----------------
-
-printf '\n%sCharliermarsh Ruff extension (keep unless you want pure removal)%s\n' "$c_yellow" "$c_reset"
-shown=0
-for cli in code cursor windsurf code-insiders codium; do
-  if have "$cli" && "$cli" --list-extensions 2>/dev/null | grep -qix 'charliermarsh.ruff'; then
-    printf '  %ssuggested%s   %s --uninstall-extension charliermarsh.ruff\n' "$c_dim" "$c_reset" "$cli"
-    shown=1
-  fi
-done
-[[ $shown -eq 0 ]] && printf '  %snot installed in any detected editor%s\n' "$c_dim" "$c_reset"
 
 printf '\n%sDone.%s\n' "$c_green" "$c_reset"
 [[ $REMOVE -eq 0 ]] && printf '  Rerun with --remove to delete drop-in plugin dirs.\n'
