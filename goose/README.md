@@ -58,17 +58,30 @@ ruff-lint/
 }
 ```
 
-The matcher `\\.pyi?$` fires on `.py` and `.pyi` files only. The hook runs after each successful edit, so goose sees ruff's fixes on the next read of the file.
+The `AfterFileEdit` event fires after each successful file edit, and the matcher is matched against the edited file path. `\\.pyi?$` restricts the rule to `.py` and `.pyi` files only.
 
 ### `scripts/ruff-fix.sh`
 
 ```sh
 #!/usr/bin/env sh
 set -euf
-# GOOSE_TOOL_OUTPUT is a JSON payload set by goose containing tool context.
-# The file path is passed as the matcher subject; fall back to stdin parsing
-# if needed.  Running ruff on the whole project is safe and simpler.
-ruff check --fix --quiet .
+
+# Goose passes the AfterFileEdit event as JSON on stdin. The matcher target
+# for AfterFileEdit is the edited file path, exposed as `.matcher_context`.
+# Fall back to linting the whole project if the payload is missing or jq is
+# unavailable.
+
+payload=$(cat)
+file=""
+if command -v jq >/dev/null 2>&1; then
+  file=$(printf '%s' "$payload" | jq -r '.matcher_context // empty')
+fi
+
+if [ -n "$file" ] && [ -e "$file" ]; then
+  ruff check --fix --quiet "$file"
+else
+  ruff check --fix --quiet .
+fi
 ```
 
 Make it executable:
@@ -77,11 +90,9 @@ Make it executable:
 chmod +x ~/.agents/plugins/ruff-lint/scripts/ruff-fix.sh
 ```
 
-**TODO** — the exact environment variable goose injects with the edited file path is not documented in the public hooks spec. `ruff check --fix .` on the project root is the safe fallback; adjust to `ruff check --fix "$FILE"` once the payload variable name is confirmed.
-
 ## Verify
 
-1. Install ruff: `pip install ruff` or `pipx install ruff`.
+1. Install ruff: `pip install ruff` or `pipx install ruff`. `jq` is recommended (`apt install jq` / `brew install jq`) so the script can target the single edited file; without it the script falls back to linting the whole tree.
 2. Copy the plugin directory to `~/.agents/plugins/ruff-lint/`.
 3. Start a goose session in a Python project: `goose session`.
 4. Ask goose to write a Python file with a lint violation, e.g.:
@@ -96,9 +107,9 @@ chmod +x ~/.agents/plugins/ruff-lint/scripts/ruff-fix.sh
 
 ## Caveats
 
-- **No inline diagnostics.** There is no LSP client in goose, so ruff violations are never shown as inline annotations. The hook auto-fixes what it can; unfixable rules (E501, etc.) are silently ignored unless you add `ruff check .` (without `--fix`) and pipe output back to goose via a tool.
-- **Autofix only.** Rules that ruff cannot auto-fix are not reported unless you add a second hook step that runs `ruff check` and writes its output somewhere goose can read.
+- **No inline diagnostics.** There is no LSP client in goose, so ruff violations are never shown as inline annotations. The hook auto-fixes what it can; unfixable rules (E501, etc.) are silently ignored unless you add a second hook step that runs `ruff check` (without `--fix`) and writes its output somewhere goose can read.
+- **Autofix only.** Rules that ruff cannot auto-fix are not reported back to goose by this hook. Pipe `ruff check` output into a file or `stderr` if you need the agent to see unfixed violations.
 - **Hook timing.** The `AfterFileEdit` event fires after each individual file edit, not after a batch. On multi-file refactors goose may re-read files before the hook finishes; this is harmless.
-- **File path env var unverified.** The hooks spec does not publicly document which environment variable carries the edited file path. The script above runs `ruff check --fix .` on the project root as a safe default. See the [goose hooks docs](https://goose-docs.ai/docs/guides/context-engineering/hooks) for updates.
+- **Payload format.** Hook input arrives as JSON on stdin. Fields include `event`, `session_id`, `matcher_context` (the edited file path for `AfterFileEdit`), `tool_name`, `tool_input`, and `working_dir`. See the [official hooks reference](https://goose-docs.ai/docs/guides/context-engineering/hooks) for the full schema.
 - **No type checking.** Ruff does not type-check. There is no Pyright integration for goose at this time.
 - **Minimum ruff version.** Requires ruff ≥ 0.5.3 for stable `ruff check --fix` behavior.
