@@ -154,7 +154,7 @@ else
 fi
 
 if vscode_has_ext rooveterinaryinc.roo-cline || vscode_has_ext rooveterinaryinc.roo-code; then
-  print_tool 'Roo Code' 'found (EOL 2026-05-15)' "merge $REPO_ROOT/roo-code/settings.json — note: consider Zoo Code fork"
+  print_tool 'Roo Code' 'found' "merge $REPO_ROOT/roo-code/settings.json (also applies to Zoo Code)"
 else
   print_miss 'Roo Code'
 fi

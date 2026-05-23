@@ -22,7 +22,7 @@ All 15 tools researched and implemented. Each `<tool>/README.md` has the verbati
 | Zed | native LSP (built-in ruff, `lsp.ruff`) | yes (`format_on_save` + `code_actions_on_format`) | yes (alongside basedpyright/pyright) | done |
 | GitHub Copilot | host editor extension (`charliermarsh.ruff`) | yes (`source.fixAll.ruff`, `source.organizeImports.ruff`) | yes | done |
 | Cline | host editor extension (`charliermarsh.ruff`); `.clinerules` for AI hints | yes | yes | done |
-| Roo Code | host editor extension (`charliermarsh.ruff`) — **EOL 2026-05-15**, fork: Zoo Code | yes | yes | done |
+| Roo Code | host editor extension (`charliermarsh.ruff`) — also covers the Zoo Code fork | yes | yes | done |
 | Continue | host editor extension (`charliermarsh.ruff`) + `.continue/rules/ruff.md` | yes | yes | done |
 | Cody (Sourcegraph) | host editor extension (`charliermarsh.ruff`) | yes | yes | done |
 

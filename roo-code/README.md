@@ -2,7 +2,7 @@
 
 **Status:** host editor delegation (`charliermarsh.ruff` in VS Code)
 
-> **Shutdown notice:** The Roo Code extension was shut down on May 15, 2026. The community fork [Zoo Code](https://github.com/Zoo-Code-Org/Zoo-Code/) continues development. This guide applies equally to Zoo Code, which inherits the same VS Code host and has not added any native ruff integration.
+Roo Code is actively maintained at [`RooCodeInc/Roo-Code`](https://github.com/RooCodeInc/Roo-Code) (Apache 2.0). The community fork [Zoo Code](https://github.com/Zoo-Code-Org/Zoo-Code/) is also active. Both inherit the same VS Code host model and the ruff setup below applies to either.
 
 ## File location
 
@@ -46,7 +46,7 @@ Roo Code is a VS Code extension — it has no bundled LSP. Ruff integration come
 ## Caveats
 
 - **No bundled LSP.** Roo Code delegates entirely to VS Code's extension host. It has never shipped its own ruff runner, MCP-based ruff server, or custom lint hooks. All ruff diagnostics originate from `charliermarsh.ruff`.
-- **Extension shutdown.** The official Roo Code extension (publisher `RooVeterinaryInc.roo-cline`) shut down on May 15, 2026. The community fork Zoo Code (`Zoo-Code-Org/Zoo-Code`) is the active successor and is configured identically.
+- **Marketplace identity.** The VS Code extension publisher ID is `RooVeterinaryInc.roo-cline` (the original Cline-era id, kept for install URL stability). The GitHub repo lives at `RooCodeInc/Roo-Code`. The Zoo Code fork (`Zoo-Code-Org/Zoo-Code`) is configured identically.
 - **`.roo/` config directory.** Roo Code uses `.roo/` for its own agent rules (system prompts, mode definitions). This is unrelated to ruff — ruff still reads `ruff.toml`, `.ruff.toml`, or `[tool.ruff]` in `pyproject.toml` from the workspace root.
 - **MCP.** Roo Code supports MCP servers for extending agent capabilities, but there is no official or widely-used MCP server for ruff. Ruff integration remains extension-based.
 - **Pyright pairing.** Ruff does not type-check. Install `ms-python.vscode-pylance` (bundles Pyright) alongside `charliermarsh.ruff` for type diagnostics. The two language servers run side by side without conflict.
