@@ -4,13 +4,20 @@
 
 Claude Code has first-class LSP plugin support since the plugins system shipped. This integration registers `ruff server` as a language server for `.py` and `.pyi` files.
 
-## File location
+## Install
 
-Copy the plugin into a Claude Code plugin directory. Either:
+Three options, easiest first:
 
-- **Marketplace / shared:** drop `tools/claude-code/` into a marketplace repo and install via `/plugin`.
-- **Local user plugin:** `~/.claude/plugins/ruff-lsp/.claude-plugin/plugin.json`
-- **Project-scoped plugin:** `<repo>/.claude/plugins/ruff-lsp/.claude-plugin/plugin.json`
+1. **Marketplace install (recommended).** This repo ships a `.claude-plugin/marketplace.json` at the root:
+
+   ```
+   /plugin marketplace add uwuclxdy/ruff-lsp
+   /plugin install ruff-lsp@ruff-lsp
+   ```
+
+2. **Local user plugin.** Copy the `claude-code/` directory contents into `~/.claude/plugins/ruff-lsp/`, so the final layout is `~/.claude/plugins/ruff-lsp/.claude-plugin/plugin.json`.
+
+3. **Project-scoped plugin.** Same as above but at `<repo>/.claude/plugins/ruff-lsp/.claude-plugin/plugin.json`.
 
 The manifest must live at `.claude-plugin/plugin.json` inside the plugin root.
 
@@ -20,10 +27,19 @@ Verbatim contents of `.claude-plugin/plugin.json`:
 
 ```json
 {
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "ruff-lsp",
+  "displayName": "Ruff LSP",
   "version": "0.1.0",
-  "description": "Ruff LSP integration for Claude Code.",
-  "author": { "name": "ruff-lsp-everywhere" },
+  "description": "Ruff LSP integration for Claude Code. Real-time Python linting, formatting, and diagnostics via `ruff server`.",
+  "author": {
+    "name": "uwuclxdy",
+    "email": "37777261+uwuclxdy@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/uwuclxdy/ruff-lsp",
+  "repository": "https://github.com/uwuclxdy/ruff-lsp",
+  "license": "MIT",
+  "keywords": ["python", "ruff", "lsp", "lint", "format", "diagnostics"],
   "lspServers": {
     "ruff": {
       "command": "ruff",
@@ -59,10 +75,10 @@ This fetches and runs ruff on demand via `uv`'s tool runner. Requires `uv` (`pip
 
 ## Verify
 
-1. Install ruff: `pip install ruff` (or `uvx ruff --version`).
-2. Install the plugin: `/plugin` → install from local path, or copy to `~/.claude/plugins/ruff-lsp/`.
+1. Install ruff: `pip install ruff` (or `uvx ruff --version`). Minimum version: 0.5.3.
+2. Install the plugin (see [Install](#install) above).
 3. Reload: `/reload-plugins`.
-4. Check the LSP is running: `/plugin` → the plugin should not appear in the Errors tab. The doctor message `Executable not found in $PATH` means ruff isn't installed.
+4. Check the LSP is running: open `/plugin` and confirm `ruff-lsp` shows no errors. If you see `Executable not found in $PATH`, ruff is not installed on `PATH` — install it or switch to the `uvx` variant below.
 5. Smoke test — ask Claude to open a Python file with an obvious lint violation:
 
    ```python
@@ -70,7 +86,7 @@ This fetches and runs ruff on demand via `uv`'s tool runner. Requires `uv` (`pip
    x = 1 ;
    ```
 
-   Claude should see diagnostics for the unused `import os` (F401) and the stray semicolon (E702).
+   Claude should see diagnostics for the unused `import os` (F401) and the stray semicolon (E703).
 
 ## Caveats
 

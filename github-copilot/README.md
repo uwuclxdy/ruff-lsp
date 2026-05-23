@@ -42,7 +42,7 @@ Merge into VS Code `settings.json`:
    x = 1 ;
    ```
 
-4. Expect two diagnostics: `F401` (unused `import os`) and `E702` (statement ends with a semicolon). Both appear in the Problems panel and inline as squiggles.
+4. Expect two diagnostics: `F401` (unused `import os`) and `E703` (statement ends with an unnecessary semicolon). Both appear in the Problems panel and inline as squiggles.
 5. GitHub Copilot Chat reads these diagnostics from the VS Code API automatically — reference them with `@workspace` or paste the error into the chat.
 
 ## Caveats

@@ -55,7 +55,7 @@ Requires `uv` (`pipx install uv` or the [Astral installer](https://docs.astral.s
    x = 1 ;
    ```
 
-   Crush should surface diagnostics for the unused `import os` (F401) and the stray semicolon (E702).
+   Crush should surface diagnostics for the unused `import os` (F401) and the stray semicolon (E703).
 
 ## Caveats
 

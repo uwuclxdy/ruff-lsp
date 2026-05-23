@@ -67,7 +67,7 @@ OpenCode's built-in `pyright` server handles type checking. Both run in parallel
    x = 1 ;
    ```
 
-4. OpenCode should report diagnostics for unused `import os` (F401) and the stray semicolon (E702).
+4. OpenCode should report diagnostics for unused `import os` (F401) and the stray semicolon (E703).
 
 ## Caveats
 

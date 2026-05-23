@@ -40,7 +40,7 @@ Roo Code is a VS Code extension — it has no bundled LSP. Ruff integration come
    x = 1 ;
    ```
 
-4. Expect two diagnostics in the Problems panel: `F401` (unused `import os`) and `E702` (statement ends with a semicolon), shown as inline squiggles.
+4. Expect two diagnostics in the Problems panel: `F401` (unused `import os`) and `E703` (statement ends with an unnecessary semicolon), shown as inline squiggles.
 5. Roo Code (or Zoo Code) reads diagnostics from VS Code's language API automatically — no extra wiring needed beyond the extension.
 
 ## Caveats

@@ -72,7 +72,7 @@ Ruff auto-discovers `ruff.toml`, `.ruff.toml`, or `[tool.ruff]` in
    ```
 
 4. Ask: `"Lint smoke.py with ruff"`. Gemini should report F401 (unused import
-   `os`) and E702 (statement ends with a semicolon).
+   `os`) and E703 (statement ends with an unnecessary semicolon).
 5. If the server is not found, run `/mcp reload` to force re-discovery.
 
 ## Caveats

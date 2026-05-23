@@ -58,7 +58,7 @@ A copy of this snippet is provided as `.aider.conf.yml` in this directory for ea
    aider --lint-cmd "python: ruff check --fix" bad.py
    ```
 
-4. Ask aider to make any trivial change (e.g. "add a comment"). After the edit, aider runs ruff, which removes the stray semicolon (E702) and flags the unused import (F401). Aider feeds those diagnostics back to the model and produces a follow-up fix before committing.
+4. Ask aider to make any trivial change (e.g. "add a comment"). After the edit, aider runs ruff, which removes the stray semicolon (E703) and flags the unused import (F401). Aider feeds those diagnostics back to the model and produces a follow-up fix before committing.
 5. Confirm the committed file has neither violation: `ruff check bad.py` should exit 0.
 
 ## Caveats

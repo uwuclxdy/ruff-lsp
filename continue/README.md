@@ -71,7 +71,7 @@ Rules are `.md` files placed in `.continue/rules/`. They are concatenated into t
    x = 1 ;
    ```
 
-4. Expect two inline diagnostics: `F401` (unused `os` import) and `E702` (statement ends with a semicolon).
+4. Expect two inline diagnostics: `F401` (unused `os` import) and `E703` (statement ends with an unnecessary semicolon).
 5. Open the Continue panel and type `@Problems` — the violations should appear as context.
 6. Ask Continue to fix the file; it should resolve both violations.
 

@@ -55,7 +55,7 @@ This relies on model compliance rather than a deterministic hook.
 
 ## Verify
 
-Open a Python session with `codex` and ask it to write a file containing `import os\nx = 1 ;` — then check that it runs `ruff check --fix` and reports or fixes F401 (unused import) and E702 (statement ends with semicolon).
+Open a Python session with `codex` and ask it to write a file containing `import os\nx = 1 ;` — then check that it runs `ruff check --fix` and reports or fixes F401 (unused import) and E703 (statement ends with an unnecessary semicolon).
 
 ## Caveats
 

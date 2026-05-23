@@ -44,7 +44,7 @@ Merge into your User Settings JSON:
    x = 1 ;
    ```
 
-3. Expect two diagnostics inline: `F401` (unused `os` import) and `E702` (statement ends with a semicolon).
+3. Expect two diagnostics inline: `F401` (unused `os` import) and `E703` (statement ends with an unnecessary semicolon).
 4. Save — Ruff auto-removes the unused import, drops the semicolon, and reformats the file.
 
 ## Caveats

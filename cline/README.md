@@ -44,7 +44,7 @@ Merge into your User Settings JSON:
    x = 1 ;
    ```
 
-3. Expect two diagnostics in the Problems panel: `F401` (unused `os` import) and `E702` (statement ends with a semicolon).
+3. Expect two diagnostics in the Problems panel: `F401` (unused `os` import) and `E703` (statement ends with an unnecessary semicolon).
 4. Cline reads diagnostics from the VS Code Problems panel — they appear in context when Cline analyzes or edits the file.
 
 ## Caveats

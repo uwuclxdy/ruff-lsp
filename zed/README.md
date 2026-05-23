@@ -55,7 +55,7 @@ The `"..."` sentinel tells Zed to keep any other already-registered language ser
    x = 1 ;
    ```
 
-3. Expect two diagnostics: **F401** (`os` imported but unused) and **E702** (statement ends with a semicolon).
+3. Expect two diagnostics: **F401** (`os` imported but unused) and **E703** (statement ends with an unnecessary semicolon).
 4. If no diagnostics appear, open the LSP log via the command palette: `editor: open language server logs`, select `ruff`, and check for startup errors.
 
 ## Caveats
