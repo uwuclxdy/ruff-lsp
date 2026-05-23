@@ -1,6 +1,8 @@
 # ruff-lsp-everywhere
 
-Ship [ruff](https://docs.astral.sh/ruff/) LSP integration across the 15 most popular AI coding assistants. Each tool gets a copy-pasteable config that wires up `ruff server` (the native Rust LSP built into the ruff binary — `ruff-lsp` the Python wrapper is deprecated).
+Ship [ruff](https://docs.astral.sh/ruff/) LSP integration across the 15 most popular AI coding assistants. Each tool gets a copy-pasteable config that wires up `ruff server`, the native Rust LSP built into the ruff binary. The older `ruff-lsp` Python wrapper is deprecated and is not used here.
+
+Distributed as a Claude Code marketplace at the repo root; per-tool drop-ins for the other 14 assistants live under their respective directories.
 
 ## Status
 
@@ -30,16 +32,34 @@ All 15 tools researched and implemented. Each `<tool>/README.md` has the verbati
 - Each `<tool>/README.md` follows the same format: **Status**, **File location**, **Config** (verbatim), **Verify**, **Caveats**.
 - For type checking, install Pyright LSP alongside. Where the tool has an official Pyright plugin we link to it.
 
+## Install (Claude Code)
+
+```
+/plugin marketplace add uwuclxdy/ruff-lsp
+/plugin install ruff-lsp@ruff-lsp
+```
+
+Requires `ruff` (≥ 0.5.3) on `PATH`. Install with `pip install ruff`, `pipx install ruff`, or `uv tool install ruff`. See [`claude-code/README.md`](claude-code/README.md) for the zero-install `uvx` variant and full verification steps.
+
+For the other 14 assistants, open the matching directory and copy or merge the snippet documented in its `README.md`.
+
 ## Repo layout
 
 ```
-ruff-lsp-everywhere/
+ruff-lsp/
+├── .claude-plugin/
+│   └── marketplace.json             # Claude Code marketplace entry point
+├── LICENSE
 ├── README.md
-├── claude-code/
+├── claude-code/                     # the Claude Code plugin itself
 │   ├── README.md
 │   └── .claude-plugin/
 │       └── plugin.json
-├── codex-cli/ ...                    # one dir per tool
+├── codex-cli/ ...                   # one dir per other tool, drop-in configs
 ├── install-all.sh                   # detect installed tools, print merge instructions
 └── uninstall.sh                     # detect existing integrations, delete drop-ins, list manual cleanup
 ```
+
+## License
+
+[MIT](LICENSE).
