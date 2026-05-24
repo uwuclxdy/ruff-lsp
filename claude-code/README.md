@@ -30,7 +30,7 @@ Verbatim contents of `.claude-plugin/plugin.json`:
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "ruff-lsp",
   "displayName": "ruff-lsp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ruff-lsp integration for Claude Code. Real-time Python linting, formatting, and diagnostics via `ruff server`.",
   "author": {
     "name": "uwuclxdy",
