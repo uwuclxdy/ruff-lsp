@@ -1,4 +1,4 @@
-# Claude Code — Ruff LSP
+# Claude Code — ruff-lsp
 
 **Status:** native LSP plugin
 
@@ -29,9 +29,9 @@ Verbatim contents of `.claude-plugin/plugin.json`:
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "ruff-lsp",
-  "displayName": "Ruff LSP",
+  "displayName": "ruff-lsp",
   "version": "0.1.0",
-  "description": "Ruff LSP integration for Claude Code. Real-time Python linting, formatting, and diagnostics via `ruff server`.",
+  "description": "ruff-lsp integration for Claude Code. Real-time Python linting, formatting, and diagnostics via `ruff server`.",
   "author": {
     "name": "uwuclxdy",
     "email": "37777261+uwuclxdy@users.noreply.github.com"

@@ -1,4 +1,4 @@
-# OpenCode — Ruff LSP
+# OpenCode — ruff-lsp
 
 **Status:** native LSP
 

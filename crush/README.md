@@ -1,4 +1,4 @@
-# Crush — Ruff LSP
+# Crush — ruff-lsp
 
 **Status:** native LSP
 

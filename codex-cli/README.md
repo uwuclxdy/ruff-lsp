@@ -1,4 +1,4 @@
-# Codex CLI — Ruff LSP
+# Codex CLI — ruff-lsp
 
 **Status:** unsupported — no LSP subsystem; closest workaround is a `PostToolUse` hook or an `AGENTS.md` standing instruction
 

@@ -1,4 +1,4 @@
-# Gemini CLI — Ruff LSP
+# Gemini CLI — ruff-lsp
 
 **Status:** lint-cmd / MCP tool
 

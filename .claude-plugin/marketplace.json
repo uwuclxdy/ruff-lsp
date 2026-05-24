@@ -9,7 +9,7 @@
     {
       "name": "ruff-lsp",
       "source": "./claude-code",
-      "description": "Ruff LSP integration for Claude Code. Real-time Python linting, formatting, and diagnostics via `ruff server`.",
+      "description": "ruff-lsp integration for Claude Code. Real-time Python linting, formatting, and diagnostics via `ruff server`.",
       "version": "0.1.0",
       "author": {
         "name": "uwuclxdy"
